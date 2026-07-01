@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Feliz cumpleaños, Aroa ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep: #1B1033;
+    --bg-deep2: #2D1B4E;
+    --coral: #FF6B9D;
+    --gold: #FFC857;
+    --lavender: #E8E0FF;
+    --cream: #FFF8E7;
+    --mint: #7CE7C7;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust: 100%; }
+
+  body{
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deep2) 45%, var(--bg-deep) 100%);
+    color: var(--lavender);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+    min-height: -webkit-fill-available;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    touch-action: manipulation;
+  }
+
+  h1, h2, .display{
+    font-family: 'Fredoka', sans-serif;
+  }
+
+  .script{
+    font-family: 'Caveat', cursive;
+  }
+
+  #sparkCanvas{
+    position: fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    pointer-events:none;
+    z-index: 999;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    min-height: 100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 2rem 1.2rem;
+    overflow:hidden;
+  }
+
+  .stars-bg{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.5), transparent),
+      radial-gradient(2px 2px at 80% 15%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 60% 70%, rgba(255,255,255,.4), transparent),
+      radial-gradient(2px 2px at 30% 80%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 90% 60%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 45% 35%, rgba(255,255,255,.3), transparent);
+    pointer-events:none;
+  }
+
+  .balloon{
+    position:absolute;
+    bottom:-20%;
+    width: 56px;
+    height: 70px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity:.85;
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+  }
+  .balloon::after{
+    content:"";
+    position:absolute;
+    bottom:-46px; left:50%;
+    width:1px; height:46px;
+    background: rgba(232,224,255,.35);
+    transform: translateX(-50%);
+  }
+  .balloon.b1{ left:8%;  background: var(--coral);  animation-duration: 13s; animation-delay: 0s; }
+  .balloon.b2{ left:20%; background: var(--gold);   animation-duration: 16s; animation-delay: 2s; width:46px; height:58px;}
+  .balloon.b3{ left:78%; background: var(--mint);   animation-duration: 14s; animation-delay: 1s; }
+  .balloon.b4{ left:88%; background: var(--coral);  animation-duration: 17s; animation-delay: 3.5s; width:42px; height:54px;}
+  .balloon.b5{ left:50%; background: var(--gold);   animation-duration: 19s; animation-delay: .8s; }
+  .balloon.b6{ left:65%; background: var(--mint);   animation-duration: 15s; animation-delay: 4s; width:40px; height:50px;}
+
+  @keyframes floatUp{
+    0%{ transform: translateY(0) rotate(-4deg); }
+    50%{ transform: translateY(-55vh) rotate(4deg); }
+    100%{ transform: translateY(-115vh) rotate(-4deg); }
+  }
+
+  .eyebrow{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing:.03em;
+    margin-bottom: .3rem;
+    position:relative; z-index:2;
+  }
+
+  .hero-number{
+    font-size: clamp(6rem, 26vw, 13rem);
+    font-weight:700;
+    line-height:.85;
+    background: linear-gradient(135deg, var(--coral), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position:relative; z-index:2;
+  }
+
+  .hero-name{
+    display:flex;
+    gap:.15em;
+    justify-content:center;
+    font-size: clamp(2.2rem, 7vw, 4rem);
+    font-weight:600;
+    letter-spacing:.04em;
+    margin-top:.2rem;
+    position:relative; z-index:2;
+  }
+  .hero-name span{
+    display:inline-block;
+    opacity:0;
+    transform: translateY(18px) scale(.85);
+    animation: letterIn .6s cubic-bezier(.2,.9,.3,1.3) forwards;
+  }
+  @keyframes letterIn{
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  .hero-sub{
+    margin-top: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--lavender);
+    opacity:.85;
+    position:relative; z-index:2;
+  }
+
+  .scroll-cue{
+    margin-top: 3.2rem;
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--gold);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.3rem;
+    animation: bob 2s ease-in-out infinite;
+    position:relative; z-index:2;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-section{
+    padding: 6rem 1.2rem 5rem;
+    display:flex;
+    justify-content:center;
+  }
+
+  .letter-card{
+    max-width: 640px;
+    width:100%;
+    background: var(--cream);
+    color: #2D1B4E;
+    border-radius: 22px;
+    padding: clamp(2rem, 5vw, 3.2rem);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.5);
+    position:relative;
+    transform: rotate(-.6deg);
+  }
+
+  .letter-card::before{
+    content:"🎂";
+    position:absolute;
+    top:-26px; left:30px;
+    font-size:2.4rem;
+    transform: rotate(8deg);
+  }
+
+  .letter-title{
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    margin-bottom: 1.3rem;
+    color: var(--bg-deep2);
+  }
+
+  .letter-card p{
+    font-size: clamp(1.02rem, 2vw, 1.12rem);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .spark-text{
+    font-family:'Caveat', cursive;
+    font-weight:600;
+    font-size: 1.18em;
+    color: #C9447A;
+  }
+
+  /* ---------- CAKE / CANDLES ---------- */
+  .cake-section{
+    padding: 4rem 1.2rem 7rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .cake-heading{
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom:.5rem;
+  }
+
+  .cake-hint{
+    font-family:'Caveat', cursive;
+    color: var(--gold);
+    font-size: 1.25rem;
+    margin-bottom: 2.6rem;
+  }
+
+  .candles{
+    display:flex;
+    gap: 1.1rem;
+    margin-bottom: 2.2rem;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .candle{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 44px;
+    height: 110px;
+    position:relative;
+    cursor:pointer;
+    background: transparent;
+    border:none;
+    padding:0;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .candle-visual{
+    width: 26px;
+    height: 90px;
+    border-radius: 6px;
+    position:relative;
+    background: repeating-linear-gradient(180deg, var(--coral) 0 10px, var(--cream) 10px 20px);
+    transition: transform .2s ease;
+    pointer-events:none;
+  }
+  .candle:nth-child(2) .candle-visual{ background: repeating-linear-gradient(180deg, var(--gold) 0 10px, var(--cream) 10px 20px); }
+  .candle:nth-child(3) .candle-visual{ background: repeating-linear-gradient(180deg, var(--mint) 0 10px, var(--cream) 10px 20px); }
+  .candle:nth-child(4) .candle-visual{ background: repeating-linear-gradient(180deg, var(--gold) 0 10px, var(--cream) 10px 20px); }
+  .candle:nth-child(5) .candle-visual{ background: repeating-linear-gradient(180deg, var(--coral) 0 10px, var(--cream) 10px 20px); }
+
+  .candle:hover .candle-visual, .candle:active .candle-visual{ transform: translateY(-3px); }
+
+  .flame{
+    position:absolute;
+    top:-22px; left:50%;
+    width: 14px; height: 20px;
+    transform: translateX(-50%) scale(0);
+    background: radial-gradient(circle at 50% 70%, var(--gold) 0%, var(--coral) 70%, transparent 75%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    opacity:0;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  .candle.lit .flame{
+    opacity:1;
+    transform: translateX(-50%) scale(1);
+    animation: flicker 1.1s ease-in-out infinite;
+  }
+  @keyframes flicker{
+    0%,100%{ transform: translateX(-50%) scale(1) rotate(-2deg); }
+    50%{ transform: translateX(-50%) scale(1.08) rotate(2deg); }
+  }
+
+  .cake-base{
+    width: min(320px, 80vw);
+    height: 70px;
+    background: linear-gradient(180deg, #FFD9E6, var(--coral));
+    border-radius: 14px 14px 30px 30px;
+    box-shadow: 0 18px 30px -10px rgba(0,0,0,.4);
+    position:relative;
+  }
+  .cake-base::before{
+    content:"";
+    position:absolute;
+    top:-14px; left:0; right:0;
+    height:24px;
+    background: var(--cream);
+    border-radius: 14px;
+  }
+
+  .pd-reveal{
+    margin-top: 3rem;
+    max-width: 560px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,200,87,.35);
+    border-radius: 18px;
+    padding: clamp(1.6rem, 4vw, 2.4rem);
+    opacity:0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .pd-reveal.show{
+    opacity:1;
+    transform: translateY(0);
+  }
+  .pd-reveal p{
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height:1.7;
+    color: var(--lavender);
+  }
+  .pd-reveal .pd-label{
+    font-family:'Caveat', cursive;
+    color: var(--gold);
+    font-size: 1.4rem;
+    display:block;
+    margin-bottom: .6rem;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding: 3rem 1rem 4rem;
+    font-family:'Caveat', cursive;
+    font-size: 1.3rem;
+    color: var(--gold);
+    opacity:.9;
+  }
+
+  .confetti-piece{
+    position:fixed;
+    top:-10px;
+    width:9px; height:14px;
+    pointer-events:none;
+    z-index: 998;
+    opacity:.95;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  }
+
+  @media (max-width: 480px){
+    .candles{ gap:.7rem; }
+    .candle{ width:20px; height:72px; }
+  }
+
+  button:focus-visible, .candle:focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sparkCanvas"></canvas>
+
+<header class="hero">
+  <div class="stars-bg"></div>
+  <div class="balloon b1"></div>
+  <div class="balloon b2"></div>
+  <div class="balloon b3"></div>
+  <div class="balloon b4"></div>
+  <div class="balloon b5"></div>
+  <div class="balloon b6"></div>
+
+  <p class="eyebrow">Hoy cumples</p>
+  <div class="hero-number">20</div>
+  <h1 class="hero-name" id="heroName"></h1>
+  <p class="hero-sub">¡Muchísimas felicidades! 🥳🎈</p>
+
+  <div class="scroll-cue">
+    <span>tienes un mensaje</span>
+    <span>↓</span>
+  </div>
+</header>
+
+<section class="letter-section">
+  <article class="letter-card">
+    <h2 class="letter-title">Para Aroa</h2>
+    <p>¡Muchísimas felicidades por esos 20, Aroa! 🥳🎈</p>
+    <p>Aunque la rutina haga que no hablemos mucho, quiero que sepas que te tengo mucho <span class="spark-text">aprecio y cariño</span>. Admiro mucho lo <span class="spark-text">increíble y creativa</span> que eres, y la <span class="spark-text">buena vibra</span> que siempre transmites a los demás.</p>
+    <p>Tienes un camino brillante por delante, no dejes que nada ni nadie te frene ni apague esa <span class="spark-text">chispa</span> que tienes. ⭐</p>
+  </article>
+</section>
+
+<section class="cake-section">
+  <h2 class="cake-heading">Enciende las velas</h2>
+  <p class="cake-hint">una por una, como esa chispa tuya ✨</p>
+
+  <div class="candles" id="candles">
+    <button class="candle" type="button" aria-label="Vela 1"><span class="candle-visual"><span class="flame"></span></span></button>
+    <button class="candle" type="button" aria-label="Vela 2"><span class="candle-visual"><span class="flame"></span></span></button>
+    <button class="candle" type="button" aria-label="Vela 3"><span class="candle-visual"><span class="flame"></span></span></button>
+    <button class="candle" type="button" aria-label="Vela 4"><span class="candle-visual"><span class="flame"></span></span></button>
+    <button class="candle" type="button" aria-label="Vela 5"><span class="candle-visual"><span class="flame"></span></span></button>
+  </div>
+
+  <div class="cake-base"></div>
+
+  <div class="pd-reveal" id="pdReveal">
+    <span class="pd-label">P.D.</span>
+    <p>Fuera de bromas, Aroa, quería ponerme un momento serio para decirte que te admiro muchísimo por cómo eres, por tu forma de ver las cosas y por ese talento y luz increíbles que tienes. Te deseo de todo corazón que te vaya espectacular en la vida, que vueles altísimo y que cumplas cada meta que te propongas, porque vales oro y te mereces lo mejor del mundo. ✨🚀</p>
+    <p>...Y habiendo dicho esta cursilería tan bonita (suéltenme), te recuerdo que todo ese éxito no te libra de mis burlas y bromas. Si me río de ti o te molesto es puramente porque me caes bien y así yo demuestro cariño.</p>
+    <p>¡Disfruta muchísimo de los 20! 👑🤪</p>
+  </div>
+</section>
+
+<footer>
+  hecho con cariño para tu día 💛
+</footer>
+
+<script>
+  // ---------- Nombre letra a letra ----------
+  const name = "AROA";
+  const heroName = document.getElementById('heroName');
+  [...name].forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.textContent = ch;
+    span.style.animationDelay = (0.15 * i + 0.3) + 's';
+    heroName.appendChild(span);
+  });
+
+  // ---------- Rastro de chispas (cursor) ----------
+  const canvas = document.getElementById('sparkCanvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let particles = [];
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const sparkColors = ['#FFC857', '#FF6B9D', '#7CE7C7', '#E8E0FF'];
+
+  function addSpark(x, y){
+    if(reduceMotion) return;
+    particles.push({
+      x, y,
+      vx: (Math.random()-0.5)*1.2,
+      vy: (Math.random()-0.5)*1.2 - 0.3,
+      life: 1,
+      size: Math.random()*2.5 + 1.5,
+      color: sparkColors[Math.floor(Math.random()*sparkColors.length)]
+    });
+    if(particles.length > 160) particles.shift();
+  }
+
+  let lastX = null, lastY = null;
+  function handlePointer(x, y){
+    if(lastX !== null){
+      const dist = Math.hypot(x-lastX, y-lastY);
+      const steps = Math.min(Math.floor(dist/8), 4);
+      for(let i=0;i<steps;i++){
+        addSpark(
+          lastX + (x-lastX)*(i/steps),
+          lastY + (y-lastY)*(i/steps)
+        );
+      }
+    } else {
+      addSpark(x,y);
+    }
+    lastX = x; lastY = y;
+  }
+
+  window.addEventListener('mousemove', e => handlePointer(e.clientX, e.clientY));
+  window.addEventListener('touchmove', e => {
+    if(e.touches[0]) handlePointer(e.touches[0].clientX, e.touches[0].clientY);
+  }, {passive:true});
+
+  function drawStar(x, y, size, color, alpha){
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= 0.025;
+      if(p.life > 0){
+        drawStar(p.x, p.y, p.size * p.life, p.color, p.life);
+      }
+    });
+    particles = particles.filter(p => p.life > 0);
+    requestAnimationFrame(animate);
+  }
+  if(!reduceMotion) animate();
+
+  // ---------- Velas interactivas ----------
+  const candleButtons = document.querySelectorAll('.candle');
+  const pdReveal = document.getElementById('pdReveal');
+  let litCount = 0;
+  let revealed = false;
+
+  candleButtons.forEach(btn => {
+    function lightCandle(e){
+      if(e && e.cancelable) e.preventDefault();
+      if(btn.classList.contains('lit')) return;
+      btn.classList.add('lit');
+      litCount++;
+      if(litCount === candleButtons.length && !revealed){
+        revealed = true;
+        setTimeout(() => {
+          pdReveal.classList.add('show');
+          pdReveal.scrollIntoView({behavior:'smooth', block:'center'});
+          burstConfetti();
+        }, 400);
+      }
+    }
+    btn.addEventListener('pointerup', lightCandle);
+    btn.addEventListener('click', lightCandle);
+  });
+
+  // ---------- Confeti al completar ----------
+  function burstConfetti(){
+    if(reduceMotion) return;
+    const colors = ['#FFC857', '#FF6B9D', '#7CE7C7', '#E8E0FF'];
+    for(let i=0;i<60;i++){
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random()*100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.transform = `rotate(${Math.random()*360}deg)`;
+      const duration = 2.2 + Math.random()*1.8;
+      piece.style.transition = `transform ${duration}s ease-in, top ${duration}s ease-in, opacity ${duration}s ease-in`;
+      document.body.appendChild(piece);
+      requestAnimationFrame(() => {
+        piece.style.top = '105vh';
+        piece.style.transform = `translateX(${(Math.random()-0.5)*200}px) rotate(${Math.random()*720}deg)`;
+        piece.style.opacity = '0.2';
+      });
+      setTimeout(() => piece.remove(), duration*1000 + 200);
+    }
+  }
+</script>
+
+</body>
+</html>
